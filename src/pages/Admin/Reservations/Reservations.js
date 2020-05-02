@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Container, Col, Row, Card, CardTitle, Table, FormGroup, Input, CardFooter } from 'reactstrap'
-import { converDate } from '../../utils/convert'
-import { getReservations } from '../../redux/actions/ReservationAction'
-import Pagination from '../../components/Pagination'
-import TableInfo from '../../components/TableInfo'
+import { converDate } from '../../../utils/convert'
+import { getReservations } from '../../../redux/actions/ReservationAction'
+import Pagination from '../../../components/Pagination'
+import TableInfo from '../../../components/TableInfo'
 
 function Reservations(props) {
   const [search, setSearch] = useState('')
