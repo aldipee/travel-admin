@@ -7,7 +7,8 @@ import rootReducer from './reducers'
 
 const config = {
   key: 'container',
-  storage
+  storage,
+  whitelist: ['Auth']
 }
 const persistedReducer = persistReducer(config, rootReducer)
 export const store = createStore(persistedReducer, applyMiddleware(thunk, logger))

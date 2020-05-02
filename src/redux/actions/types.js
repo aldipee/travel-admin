@@ -35,6 +35,7 @@ export const GET_ALL_BUS_FOR_AGENT = 'GET_ALL_BUS_FOR_AGENT'
 export const GET_ALL_BUS_FOR_ADMIN = 'GET_ALL_BUS_FOR_ADMIN'
 export const SET_LOADING_BUS = 'SET_LOADING_BUS'
 export const ERROR_BUS = 'ERROR_BUS'
+export const GET_AGENTS = 'GET_AGENTS'
 // Auth
 export const SET_LOGIN = 'SET_LOGIN'
 export const SET_LOGOUT = 'SET_LOGOUT'

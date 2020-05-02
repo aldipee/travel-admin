@@ -8,6 +8,8 @@ import Dashboard from './Dashboard'
 import Reservations from './Reservations/Reservations'
 import ReservationsDetails from './Reservations/ReservationDetail'
 import Schedules from './Schedules/Schedules'
+import Bus from './Buses/Bus'
+import Agents from './Agents/Agent'
 
 const Home = (props) => {
   return (
@@ -18,6 +20,8 @@ const Home = (props) => {
           <StrictRoute component={Reservations} path="/reservations" exact />
           <StrictRoute component={ReservationsDetails} path="/reservations/details/:id" exact />
           <StrictRoute component={Schedules} path="/schedules" exact />
+          <StrictRoute component={Bus} path="/buses" exact />
+          <StrictRoute component={Agents} path="/agents" exact />
         </Switch>
       </Layout>
     </>
