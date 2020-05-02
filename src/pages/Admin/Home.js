@@ -10,6 +10,7 @@ import ReservationsDetails from './Reservations/ReservationDetail'
 import Schedules from './Schedules/Schedules'
 import Bus from './Buses/Bus'
 import Agents from './Agents/Agent'
+import Route from './Route/Route'
 
 const Home = (props) => {
   return (
@@ -22,6 +23,7 @@ const Home = (props) => {
           <StrictRoute component={Schedules} path="/schedules" exact />
           <StrictRoute component={Bus} path="/buses" exact />
           <StrictRoute component={Agents} path="/agents" exact />
+          <StrictRoute component={Route} path="/routes" exact />
         </Switch>
       </Layout>
     </>
