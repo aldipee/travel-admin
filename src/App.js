@@ -1,12 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
-
 // Page
 import Login from './pages/Login'
-import Home from './pages/Home'
+import Home from './pages/Admin/Home'
 import { connect } from 'react-redux'
-const App = () => {
+const App = (props) => {
   return (
     <Router>
       <Switch>
@@ -18,6 +17,6 @@ const App = () => {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.AuthData
+  auth: state.Auth
 })
 export default connect(mapStateToProps, {})(App)
