@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 import formSerizalize from 'form-serialize'
 import { Button, Container, Col, Row, Card, CardTitle, Table, UncontrolledTooltip } from 'reactstrap'
 import { IoIosLogIn } from 'react-icons/io'
-import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'
-import swal from 'sweetalert'
+import { FaSort } from 'react-icons/fa'
 import { connect } from 'react-redux'
-
 import { getAllRoutes, addRoutes } from '../../../redux/actions/RouteAction'
 import InsertModal from '../../../components/Route/ModalRoute'
 import Pagination from '../../../components/Pagination'
@@ -52,7 +50,7 @@ function Routes(props) {
   }
 
   const onPageChanged = (data) => {
-    const { currentPage, totalPages, pageLimit } = data
+    const { currentPage } = data
     setStartNumber(startNumber + (currentPage - 1) * props.pageInfo.limit)
     movePage(currentPage)
   }

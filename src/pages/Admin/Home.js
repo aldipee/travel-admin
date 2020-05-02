@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch } from 'react-router-dom'
 
 import StrictRoute from '../../components/PrivateRoute'
-
 import Layout from '../Layout/DashboardLayout'
 import Dashboard from './Dashboard'
 import Reservations from './Reservations/Reservations'
@@ -11,6 +10,7 @@ import Schedules from './Schedules/Schedules'
 import Bus from './Buses/Bus'
 import Agents from './Agents/Agent'
 import Route from './Route/Route'
+import Users from './Users/Users'
 
 const Home = (props) => {
   return (
@@ -24,6 +24,7 @@ const Home = (props) => {
           <StrictRoute component={Bus} path="/buses" exact />
           <StrictRoute component={Agents} path="/agents" exact />
           <StrictRoute component={Route} path="/routes" exact />
+          <StrictRoute component={Users} path="/users" exact />
         </Switch>
       </Layout>
     </>

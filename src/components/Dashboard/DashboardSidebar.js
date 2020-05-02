@@ -14,16 +14,17 @@ import {
 } from '@mdi/js'
 
 const MenuText = Style('span')`
-color : #8d9498;
+color : #fff;
 text-decoration : none;
 font-weight : bold;
-margin : 20px;
+margin : 10px;
 &:hover {
   text-decoration : none;
 }`
 const ListGroupItem = Style(BSListGroupItem)`
   margin : 5px 0px;
   border : none;
+  background : transparent;
   border-left: 6px solid #fff !important;
   &:hover {
     border-left: 6px solid #5b8efc !important;
@@ -32,7 +33,7 @@ const ListGroupItem = Style(BSListGroupItem)`
  
 `
 const SidebarBody = Style('div')`
-  background-color : #fff;
+  background-color : transparent;
   & .item-link:hover {
     text-decoration : none;
   }
@@ -91,7 +92,7 @@ function SidebarMenu(props) {
           MenuItem.concat(AdminMenu).map((data, index) => (
             <Link className="item-link" to={data.path}>
               <ListGroupItem>
-                <Icon className="icon" path={data.icon} size={1} color="#8d9498" />
+                <Icon className="icon" path={data.icon} size={1} color="#fff" />
                 <MenuText>{data.text}</MenuText>
               </ListGroupItem>
             </Link>
@@ -101,7 +102,7 @@ function SidebarMenu(props) {
           MenuItem.map((data, index) => (
             <Link className="item-link" to={data.path}>
               <ListGroupItem>
-                <Icon path={data.icon} size={1} color="#8d9498" />
+                <Icon path={data.icon} size={1} color="#fff" />
                 <MenuText>{data.text}</MenuText>
               </ListGroupItem>
             </Link>

@@ -33,7 +33,7 @@ padding: 0.875rem 1.25rem;
 font-size: 1.2rem;
 `
 const SidebarWrapper = Style('div')`
-  background : #fff !important;
+  background : linear-gradient(180deg, rgba(22,54,118,1) 0%, rgba(12,82,163,1) 53%, rgba(68,127,206,1) 100%) !important;
   border : none !important;
   z-index : 99;
   box-shadow: 2px 3px 7px rgba(66, 66, 66, 0.1) !important;
