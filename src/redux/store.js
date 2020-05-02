@@ -7,8 +7,8 @@ import rootReducer from './reducers'
 
 const config = {
   key: 'container',
-  storage,
+  storage
 }
 const persistedReducer = persistReducer(config, rootReducer)
-export const store = createStore(persistedReducer, applyMiddleware(logger, thunk))
+export const store = createStore(persistedReducer, applyMiddleware(thunk, logger))
 export const pesistor = persistStore(store)

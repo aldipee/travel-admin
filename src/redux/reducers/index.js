@@ -1,10 +1,14 @@
 import { SET_LOGOUT } from '../actions/types'
 import { combineReducers } from 'redux'
+
 import AuthReducer from './AuthReducer'
 import ReservationReducer from './ReservationReducer'
+import SchedulesReducer from './SchedulesReducer'
+
 const appReducer = combineReducers({
   Auth: AuthReducer,
-  Reservations: ReservationReducer
+  Reservations: ReservationReducer,
+  Schedules: SchedulesReducer
 })
 
 const rootReducer = (state, action) => {
