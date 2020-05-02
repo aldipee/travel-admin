@@ -1,32 +1,32 @@
 import axios from 'axios'
 import { SET_LOADING_AUTH, SET_LOGIN, ERROR_AUTH } from '../actions/types'
 
-export const userLogin = (username, password, callback) => async dispatch => {
+export const userLogin = (username, password, callback) => async (dispatch) => {
   try {
     setLoading()
     const res = await axios.post('http://localhost:5001/auth/login', { username, password })
     if (res.data.token) {
+      callback(true)
       localStorage.setItem('token_user', res.data.token)
       localStorage.setItem('role', res.data.role)
-      callback({ success: true })
       dispatch({
         type: SET_LOGIN,
-        payload: res.data.role,
+        payload: res.data.role
       })
     } else {
-      callback({ success: false })
+      callback(false)
     }
   } catch (error) {
     console.error('This Error comes from Auth Actions', error)
     dispatch({
       type: ERROR_AUTH,
-      payload: error,
+      payload: error
     })
   }
 }
 
 export const setLoading = () => {
   return {
-    action: SET_LOADING_AUTH,
+    action: SET_LOADING_AUTH
   }
 }
