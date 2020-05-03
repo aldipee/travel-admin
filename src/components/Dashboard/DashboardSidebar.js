@@ -17,6 +17,7 @@ const MenuText = Style('span')`
 color : #fff;
 text-decoration : none;
 font-weight : bold;
+font-size : 14px;
 margin : 10px;
 &:hover {
   text-decoration : none;

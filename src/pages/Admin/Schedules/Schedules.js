@@ -1,7 +1,19 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
-import { Button, Container, Col, Row, Card, CardTitle, CardFooter, Input, Form, ListGroup } from 'reactstrap'
+import {
+  Button,
+  Container,
+  Col,
+  Row,
+  Card,
+  CardTitle,
+  CardFooter,
+  Input,
+  Form,
+  ListGroup,
+  Label
+} from 'reactstrap'
 import { connect } from 'react-redux'
 import { getSchedules, loadRoutes } from '../../../redux/actions/SchedulesAction'
 import Pagination from '../../../components/Pagination'
@@ -32,12 +44,11 @@ function Schedules(props) {
         ? `${props.history.location.search}&page=${currentPage}`
         : `?page=${currentPage}`
     } `
-    console.log(query, 'FUCCCC')
+
     props.getSchedules(query)
   }
 
   useEffect(() => {
-    console.log('HII')
     props.loadRoutes()
   }, [])
 
@@ -61,16 +72,27 @@ function Schedules(props) {
     <Container fluid={true}>
       <Row className="mx-2 my-2">
         <Col sm="12" className="mt-3">
-          <Card body>
+          <Card body style={{ background: '#e4e8ed' }}>
             <CardTitle>
               <Row>
-                <Col sm="6">All Routes</Col>
+                <Col sm="6"></Col>
                 <Col sm="6" className="text-right"></Col>
               </Row>
               <Row>
                 <Col sm="12">
                   <Form inline>
                     <Col sm="6">
+                      <Label
+                        style={{
+                          color: '#2972a6',
+                          textAlign: 'left',
+                          display: 'block',
+                          fontWeight: 'bold',
+                          fontSize: '14px',
+                          marginBottom: '10px'
+                        }}>
+                        Select Route
+                      </Label>
                       <Select
                         onChange={selectDest}
                         name="origDest"
@@ -80,6 +102,17 @@ function Schedules(props) {
                       />
                     </Col>
                     <Col sm="4">
+                      <Label
+                        style={{
+                          color: '#2972a6',
+                          textAlign: 'left',
+                          display: 'block',
+                          fontWeight: 'bold',
+                          fontSize: '14px',
+                          marginBottom: '10px'
+                        }}>
+                        Select Date
+                      </Label>
                       <Input
                         type="date"
                         name="date"
@@ -99,9 +132,8 @@ function Schedules(props) {
       </Row>
       <Row className="mx-2 my-2">
         <Col md={12}>
-          <CardTitle></CardTitle>
           <Card body>{newTable}</Card>
-          <CardFooter>
+          <CardFooter className="myCard">
             <Row>
               <Col sm={6}></Col>
               <Col sm={2}>

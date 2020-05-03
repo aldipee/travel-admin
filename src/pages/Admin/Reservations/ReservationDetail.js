@@ -31,7 +31,7 @@ class ReservationsDetails extends Component {
           <Row>
             <Col sm="12" className="mb-2 mt-2"></Col>
             <Col sm="12">
-              <Card body>
+              <Card body className="myCard">
                 <ListGroupItem>
                   <ListGroupItemHeading>
                     Reservations ID : #{data && data.id_reservation}
@@ -51,7 +51,7 @@ class ReservationsDetails extends Component {
                         </CardBody>
                         <CardBody>
                           <CardText>
-                            <Col md="8">
+                            <Col md="12">
                               <Badge color="primary" style={{ padding: '3px' }}>
                                 <h5>Routes Informations</h5>
                               </Badge>
@@ -69,7 +69,7 @@ class ReservationsDetails extends Component {
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <th>{data && data.origin}</th>
+                                    <td>{data && data.origin}</td>
                                     <td>{data && data.destination}</td>
                                     <td>{data && data.time}</td>
                                     <td>{data && data.date && converDate(data.date)}</td>
@@ -79,7 +79,7 @@ class ReservationsDetails extends Component {
                                 </tbody>
                               </Table>
                             </Col>
-                            <Col md="10" className="mt-5">
+                            <Col md="12" className="mt-5">
                               <Badge color="success" style={{ padding: '3px' }}>
                                 <h5>Passenger Informations</h5>
                               </Badge>

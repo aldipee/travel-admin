@@ -11,6 +11,7 @@ import Bus from './Buses/Bus'
 import Agents from './Agents/Agent'
 import Route from './Route/Route'
 import Users from './Users/Users'
+import UserDetails from './Users/UserDetail'
 
 const Home = (props) => {
   return (
@@ -25,6 +26,7 @@ const Home = (props) => {
           <StrictRoute component={Agents} path="/agents" exact />
           <StrictRoute component={Route} path="/routes" exact />
           <StrictRoute component={Users} path="/users" exact />
+          <StrictRoute component={UserDetails} path="/users/profile/:id" exact />
         </Switch>
       </Layout>
     </>

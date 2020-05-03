@@ -12,7 +12,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
 export const getReservations = (query) => async (dispatch) => {
   try {
     setLoading()
-    query = (query && `reservations/all${query}`) || 'reservations/all'
+    query = (query && `reservations/all${query}&limit=8`) || 'reservations/all?limit=8'
     const res = await axios.get(config.DATA_URL.concat(query))
     dispatch({
       type: GET_RESERVATIONS_DATA,

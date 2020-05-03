@@ -1,5 +1,5 @@
 body {
-  font-family: 'Lato', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   font-weight: 400;
   color: #495057 !important;
   overflow-x: hidden;
@@ -273,4 +273,32 @@ body {
   .steps-description {
     text-align: center;
   }
+}
+
+.myTable td {
+  font-size: 14px;
+  font-weight: 500;
+  color: #878787;
+  border-bottom: 1px solid #ededed;
+}
+
+.myThead {
+  border-bottom: 1px solid #dbdbdb;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #2972a6;
+}
+.myThead th {
+  font-weight: 600;
+}
+
+.myCard {
+  border: none;
+}
+.pageTitle {
+  font-size: 25px;
+}
+.searchInput {
+  font-size: 14px;
+  padding: 10px;
 }

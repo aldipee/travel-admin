@@ -6,7 +6,7 @@ import { convertToRupiah, tConvert } from '../../utils/convert'
 import config from '../../utils/config'
 const ListGroupItem = styled(Item)`
   margin: 5px 0px 3px 0px;
-  border: 1px solid rgba(252, 237, 74, 0.73) !important;
+  border: none;
   border-radius: 0 !important;
   padding: 0.3rem;
 `

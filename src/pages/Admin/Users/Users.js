@@ -2,10 +2,24 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import FormSerialize from 'form-serialize'
 import { connect } from 'react-redux'
-import { Button, Container, Col, Row, Card, CardTitle, Table, FormGroup, Form, Input } from 'reactstrap'
+import {
+  Button,
+  Container,
+  Col,
+  Row,
+  Card,
+  CardTitle,
+  Table,
+  FormGroup,
+  Form,
+  Input,
+  Label
+} from 'reactstrap'
 import Pagination from '../../../components/Pagination'
 import { getAllUsers } from '../../../redux/actions/UsersAction'
 import { converDate } from '../../../utils/convert'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+import config from '../../../utils/config'
 
 function Users(props) {
   const submitSearch = (e) => {
@@ -36,28 +50,56 @@ function Users(props) {
   }
   const item = (
     <>
-      <thead>
+      <thead className="myThead">
         <tr>
-          <th>#</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Full Name</th>
-          <th>Gender</th>
-          <th>Date of Birth</th>
+          <th></th>
+          <th>
+            Username
+            <span style={{ marginLeft: '9px', marginTop: '10px' }}>
+              <IoIosArrowUp color="#dbdbdb" style={{ position: 'absolute', top: 10 }} />
+              <IoIosArrowDown color="#dbdbdb" style={{ position: 'absolute', top: 20 }} />
+            </span>
+          </th>
+          <th>
+            Email
+            <span style={{ marginLeft: '9px', marginTop: '10px' }}>
+              <IoIosArrowUp color="#dbdbdb" style={{ position: 'absolute', top: 10 }} />
+              <IoIosArrowDown color="#dbdbdb" style={{ position: 'absolute', top: 20 }} />
+            </span>
+          </th>
+          <th>
+            Full Name
+            <span style={{ marginLeft: '9px', marginTop: '10px' }}>
+              <IoIosArrowUp color="#dbdbdb" style={{ position: 'absolute', top: 10 }} />
+              <IoIosArrowDown color="#dbdbdb" style={{ position: 'absolute', top: 20 }} />
+            </span>
+          </th>
+
+          <th>
+            Join on
+            <span style={{ marginLeft: '9px', marginTop: '10px' }}>
+              <IoIosArrowUp color="#dbdbdb" style={{ position: 'absolute', top: 10 }} />
+              <IoIosArrowDown color="#dbdbdb" style={{ position: 'absolute', top: 20 }} />
+            </span>
+          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style={{ justifyContent: 'center', alignContent: 'center' }}>
         {props.users &&
           props.users.map((data, index) => (
             <tr>
-              <th scope="row">{index + 1}</th>
+              <td width="6%">
+                <img
+                  style={{ height: 'auto', width: '100%', borderRadius: 100 }}
+                  src={config.DATA_FILE.concat(data.avatar)}
+                />
+              </td>
               <td>
                 <Link to={`${props.match.path}/profile/${data.id}`}>{data.username}</Link>
               </td>
               <td>{data.email}</td>
               <td> {data.fullName}</td>
-              <td>{data.gender}</td>
-              <td>{data.bod}</td>
+              <td> {converDate(data.createAt)}</td>
             </tr>
           ))}
       </tbody>
@@ -89,7 +131,7 @@ function Users(props) {
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style={{ display: 'flex' }}>
         {placeholderItems &&
           placeholderItems.map((data, index) => (
             <tr>
@@ -122,38 +164,83 @@ function Users(props) {
       <Container fluid={true}>
         <Row>
           <Col sm="12" className="mt-4">
-            <Card body>
+            <Card body style={{ background: '#e4e8ed' }} className="myCard">
               <CardTitle>
                 <Row>
-                  <Col sm="6"> </Col>
+                  <Col sm=""> </Col>
                 </Row>
                 <Row>
                   <Form inline onSubmit={submitSearch}>
-                    <FormGroup className="mr-4">
-                      <Input type="text" name="value" placeholder="Search by name.." />
+                    <FormGroup className="mx-4">
+                      <div>
+                        <Label
+                          style={{
+                            color: '#2972a6',
+                            textAlign: 'left',
+                            display: 'block',
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            marginBottom: '10px'
+                          }}>
+                          Search Data
+                        </Label>
+                        <Input type="text" name="value" placeholder="Search by name.." />
+                      </div>
+                    </FormGroup>
+                    <FormGroup className="mr-3">
+                      <div>
+                        <Label
+                          style={{
+                            color: '#2972a6',
+                            textAlign: 'left',
+                            display: 'block',
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            marginBottom: '10px'
+                          }}>
+                          Search By
+                        </Label>
+                        <Input type="select" name="searchBy">
+                          <option value="fullName">Name</option>
+                          <option value="username">Username</option>
+                          <option value="phoneNumber">Phone Number</option>
+                        </Input>
+                      </div>
                     </FormGroup>
 
                     <FormGroup className="mr-4">
-                      <Input type="select" name="searchBy">
-                        <option value="fullName">Name</option>
-                        <option value="username">Username</option>
-                        <option value="phoneNumber">Phone Number</option>
-                      </Input>
+                      <div>
+                        <Label
+                          style={{
+                            color: '#2972a6',
+                            textAlign: 'left',
+                            display: 'block',
+                            fontWeight: 'bold',
+                            fontSize: '14px',
+                            marginBottom: '10px'
+                          }}>
+                          Limit
+                        </Label>
+                        <Input type="select" name="limit">
+                          <option value="5">Show 5 data</option>
+                          <option value="25">Show 25 data</option>
+                          <option value="50">Show 50 data</option>
+                        </Input>
+                      </div>
                     </FormGroup>
-
-                    <FormGroup className="mr-4">
-                      <Input type="select" name="limit">
-                        <option value="5">Show 5 data</option>
-                        <option value="25">Show 25 data</option>
-                        <option value="50">Show 50 data</option>
-                      </Input>
-                    </FormGroup>
-
-                    <Button>Go!</Button>
+                    <div style={{ marginTop: '30px' }}>
+                      <Button>Search</Button>
+                    </div>
                   </Form>
                 </Row>
               </CardTitle>
-              <Table>{props.isLoading ? placeholder : item}</Table>
+            </Card>
+            <Card className="myCard mt-4">
+              <Table borderless className="mx-4 myTable">
+                {props.isLoading ? placeholder : item}
+              </Table>
+            </Card>
+            {/* <div className="mx-4">
               {props.pageInfo && (
                 <Pagination
                   totalRecords={props.pageInfo && props.pageInfo.totalData}
@@ -162,7 +249,7 @@ function Users(props) {
                   onPageChanged={onPageChanged}
                 />
               )}
-            </Card>
+            </div> */}
           </Col>
         </Row>
       </Container>

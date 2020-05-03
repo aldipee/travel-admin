@@ -17,7 +17,7 @@ export const getUserById = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ERROR_USERS,
-      payload: error.response.data
+      payload: error.response
     })
   }
 }

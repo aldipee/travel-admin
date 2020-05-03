@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import Styles from 'styled-components'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Container, Col, Row, Card, CardTitle, Table, FormGroup, Input, CardFooter } from 'reactstrap'
+import { Container, Col, Row, Card, CardTitle, Table, Label, Input, CardFooter, Button } from 'reactstrap'
 import { converDate } from '../../../utils/convert'
 import { getReservations } from '../../../redux/actions/ReservationAction'
 import Pagination from '../../../components/Pagination'
@@ -26,29 +27,27 @@ function Reservations(props) {
     props.getReservations(query)
   }
 
-  const searchData = (e) => {
-    setSearch(e.currentTarget.value)
+  const searchData = () => {
     props.history.push({
-      search: `?search[key]=fullName&search[value]=${e.currentTarget.value}`
+      search: `?search[key]=fullName&search[value]=${search}`
     })
     props.getReservations(props.history.location.search)
   }
 
-  const headerTable = ['#', 'ID Res', 'Status', 'Passenger Name', 'Boarding Time', 'Data', 'Gender', 'Routes']
+  const headerTable = ['ID Res', 'Status', 'Passenger Name', 'Boarding Time', 'Data', 'Routes']
   const item = (
     <>
-      <thead>
+      <thead className="myThead">
         <tr>
           {headerTable.map((data, i) => (
             <th>{data}</th>
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="myTable">
         {props.reservations.data &&
           props.reservations.data.map((data, index) => (
             <tr>
-              <th scope="row">{index + 1}</th>
               <td>
                 <Link to={`${props.match.path}/details/${data && data.id_reservation}`}>
                   {data && `#${data.id_reservation}`}{' '}
@@ -58,7 +57,6 @@ function Reservations(props) {
               <td>{data && data.fullName}</td>
               <td> {data && data.time}</td>
               <td>{data && data.date && converDate(data.date)}</td>
-              <td>{data && data.gender}</td>
               <td>{data && `${data.origin} - ${data.destination}`}</td>
             </tr>
           ))}
@@ -135,39 +133,52 @@ function Reservations(props) {
     <Container fluid={true}>
       <Row>
         <Col sm="12" className="mt-3">
-          <Card body>
+          <Card className="myCard px-4" style={{ background: '#e4e8ed' }}>
             <CardTitle>
-              <Row>
-                <Col sm="12"></Col>
-                <Col sm="6" className="text-right"></Col>
-              </Row>
-              <Row>
-                <Col sm="3">
-                  <FormGroup>
+              <Row className="mt-3">
+                <Col sm="4">
+                  <div>
+                    <Label
+                      style={{
+                        color: '#2972a6',
+                        textAlign: 'left',
+                        display: 'block',
+                        fontWeight: 'bold',
+                        fontSize: '14px',
+                        marginBottom: '10px'
+                      }}>
+                      Search Data
+                    </Label>
                     <Input
                       type="text"
                       name="name"
                       value={search}
-                      onChange={searchData}
+                      onChange={(e) => setSearch(e.currentTarget.value)}
                       placeholder="Search by name.."
                     />
-                  </FormGroup>
+                  </div>
                 </Col>
-                <Col sm="6"></Col>
+                <Col sm="2">
+                  <Button style={{ marginTop: '30px' }} onClick={searchData}>
+                    Search
+                  </Button>
+                </Col>
+                <Col sm="6" className="text-right"></Col>
               </Row>
             </CardTitle>
-            <Table>{props.reservations.isLoading ? placeholder : item}</Table>
+          </Card>
+          <Card body className="myCard">
+            <Table borderless>{props.reservations.isLoading ? placeholder : item}</Table>
             <CardFooter>
               <Row>
                 <Col sm={4}>
-                  {props.pageInfo && (
-                    <Pagination
-                      totalRecords={props.pageInfo && props.pageInfo.totalData}
-                      pageLimit={props.pageInfo && props.pageInfo.perPage}
-                      pageNeighbours={0}
-                      onPageChanged={onPageChanged}
-                    />
-                  )}
+                  {() => console.log(props.pageInfo, 'SEKIIAA')}
+                  <Pagination
+                    totalRecords={props.pageInfo.totalData}
+                    pageLimit={parseInt(props.pageInfo.perPage)}
+                    pageNeighbours={0}
+                    onPageChanged={onPageChanged}
+                  />
                 </Col>
                 <Col sm={8}>
                   <Row>

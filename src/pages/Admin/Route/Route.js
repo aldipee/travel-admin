@@ -63,27 +63,21 @@ function Routes(props) {
           <Container fluid={true}>
             <Row>
               <Col sm="12" className="mt-4">
-                <Card body>
+                <Card body style={{ background: '#e4e8ed' }} className="myCard">
+                  <div style={{ textAlign: 'right' }}>
+                    <Button style={{ width: '125px' }} onClick={openModal}>
+                      Add Routes
+                    </Button>
+                  </div>
                   <CardTitle>
-                    <Row>
-                      {props.pageInfo && (
-                        <TableInfo
-                          totalData={props.pageInfo.totalData}
-                          page={props.pageInfo.page}
-                          totalPage={props.pageInfo.totalPage}
-                          title="Routes"
-                        />
-                      )}
-                      <Col sm="6" className="text-right">
-                        <Button onClick={openModal}>Add Routes</Button>
-                      </Col>
-                    </Row>
                     <TableSearch onSubmit={search} />
                   </CardTitle>
-                  <Table>
-                    <thead>
+                </Card>
+
+                <Card body className="myCard mt-4">
+                  <Table borderless className="mx-4 myTable">
+                    <thead className="myThead">
                       <tr>
-                        <th name="no">#</th>
                         <th onClick={() => sortyBy('origin')}>
                           Depature <FaSort color="#8d9498" />
                         </th>
@@ -93,6 +87,7 @@ function Routes(props) {
                         <th onClick={() => sortyBy('distance')}>
                           Distance (KM) <FaSort color="#8d9498" />
                         </th>
+                        <th>Status</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -100,7 +95,6 @@ function Routes(props) {
                       {data &&
                         data.map((data, index) => (
                           <tr>
-                            <th scope="row">{startNumber + index}</th>
                             <td>
                               {data && data.origin} ({data && data.origin_code})
                             </td>
@@ -108,6 +102,7 @@ function Routes(props) {
                               {data && data.destination} ({data && data.destination_code})
                             </td>
                             <td> {data && data.distance}</td>
+                            <td>Active</td>
 
                             <td>
                               <Link to={`${props.match.path}/edit/${data && data.id}`}>
@@ -117,12 +112,6 @@ function Routes(props) {
                                   Edit Data
                                 </UncontrolledTooltip>
                               </Link>
-                              {/* <Button close>
-                            <Icon id='DeleteData' path={mdiDeleteOutline} size={1} color='#8d9498' />
-                            <UncontrolledTooltip placement='right' target='DeleteData'>
-                              Delete Data
-                            </UncontrolledTooltip>
-                          </Button> */}
                             </td>
                           </tr>
                         ))}
@@ -140,6 +129,14 @@ function Routes(props) {
                             handleMove={handleMove}
                           />
                         </div>
+                      )}
+                      {props.pageInfo && (
+                        <TableInfo
+                          totalData={props.pageInfo.totalData}
+                          page={props.pageInfo.page}
+                          totalPage={props.pageInfo.totalPage}
+                          title="Routes"
+                        />
                       )}
                     </Col>
                   </Row>
