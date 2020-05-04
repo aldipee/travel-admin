@@ -8,6 +8,7 @@ import BusReducer from './BusReducer'
 import AgentReducer from './AgentReducer'
 import RouteReducer from './RouteReducer'
 import UsersReducer from './UsersReducer'
+import TopUpReducer from './TopUpReducer'
 
 const appReducer = combineReducers({
   Auth: AuthReducer,
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   Bus: BusReducer,
   Agent: AgentReducer,
   Routes: RouteReducer,
-  User: UsersReducer
+  User: UsersReducer,
+  TopUp: TopUpReducer
 })
 
 const rootReducer = (state, action) => {

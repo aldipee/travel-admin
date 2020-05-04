@@ -4,13 +4,14 @@ import PrivateRoute from './components/PrivateRoute'
 // Page
 import Login from './pages/Login'
 import Home from './pages/Admin/Home'
+import Travel from './pages/Travel/Home'
 import { connect } from 'react-redux'
 const App = (props) => {
   return (
     <Router>
       <Switch>
         <Route exact path="/auth/login" component={Login} />
-        <PrivateRoute component={Home} path="/" />
+        <PrivateRoute component={props.auth.role === 1 ? Home : Travel} path="/" />
       </Switch>
     </Router>
   )

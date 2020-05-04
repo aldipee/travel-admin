@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_LOADING_USERS, GET_ALL_USERS, GET_USER_BY_ID, ERROR_USERS } from '../actions/types'
+import { SET_LOADING_USERS, GET_ALL_USERS, GET_USER_BY_ID, ERROR_USERS, SET_LOGOUT } from '../actions/types'
 import config from '../../utils/config'
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
@@ -40,6 +40,16 @@ export const getAllUsers = (query) => async (dispatch) => {
       type: ERROR_USERS,
       payload: error
     })
+  }
+}
+
+export const setLogout = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: SET_LOGOUT
+    })
+  } catch (error) {
+    console.log(error)
   }
 }
 

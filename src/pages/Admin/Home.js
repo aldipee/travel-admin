@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch } from 'react-router-dom'
 
 import StrictRoute from '../../components/PrivateRoute'
+import Logout from '../../components/Logout'
 import Layout from '../Layout/DashboardLayout'
 import Dashboard from './Dashboard'
 import Reservations from './Reservations/Reservations'
@@ -12,6 +13,7 @@ import Agents from './Agents/Agent'
 import Route from './Route/Route'
 import Users from './Users/Users'
 import UserDetails from './Users/UserDetail'
+import TopUp from './TopUp/TopUp'
 
 const Home = (props) => {
   return (
@@ -27,6 +29,8 @@ const Home = (props) => {
           <StrictRoute component={Route} path="/routes" exact />
           <StrictRoute component={Users} path="/users" exact />
           <StrictRoute component={UserDetails} path="/users/profile/:id" exact />
+          <StrictRoute component={TopUp} path="/topup" exact />
+          <Logout exact path="/logout" />
         </Switch>
       </Layout>
     </>

@@ -1,6 +1,13 @@
 import axios from 'axios'
 import config from '../../utils/config'
-import { SET_LOADING_BUS, ERROR_BUS, GET_ALL_BUS_FOR_AGENT, GET_ALL_BUS_FOR_ADMIN, GET_AGENTS } from './types'
+import {
+  SET_LOADING_BUS,
+  ERROR_BUS,
+  GET_ALL_BUS_FOR_AGENT,
+  GET_ALL_BUS_FOR_ADMIN,
+  GET_AGENTS,
+  GET_BUSESS
+} from './types'
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
 export const getBusForAgent = () => async (dispatch) => {
@@ -40,7 +47,17 @@ export const getBusForAdmin = (id) => async (dispatch) => {
     })
   }
 }
-
+export const getAllBus = () => async (dispatch) => {
+  try {
+    const res = await axios.get(config.DATA_URL.concat('bus'))
+    dispatch({
+      type: GET_BUSESS,
+      payload: res.data.data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 export const loadAgents = () => async (dispatch) => {
   const data = await axios.get(config.DATA_URL.concat('agents'))
   let agents = data.data.data.map((dest) => ({
@@ -51,6 +68,23 @@ export const loadAgents = () => async (dispatch) => {
     type: GET_AGENTS,
     payload: agents
   })
+}
+
+export const insertBus = (data, callback) => async (dispatch) => {
+  try {
+    const res = await axios.post(config.DATA_URL.concat('bus'), data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    if (res.data.status) {
+      callback(true)
+    } else {
+      callback(false)
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const setLoading = () => {

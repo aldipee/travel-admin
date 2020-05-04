@@ -43,3 +43,7 @@ export const SET_LOADING_AUTH = 'SET_LOADING_AUTH'
 export const SET_WRONG_DATA = 'SET_WRONG_DATA'
 export const ERROR_AUTH = 'ERROR_AUTH'
 export const IS_TOKEN_AVAILABLE = 'IS_TOKEN_AVAILABLE'
+
+export const GET_ALL_TOPUP = 'GET_ALL_TOPUP'
+export const APPROVE_TOPUP = 'APPROVE_TOPUP'
+export const GET_BUSESS = 'GET_BUSESS'

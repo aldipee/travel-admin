@@ -4,6 +4,7 @@ import { ListGroup, ListGroupItem as BSListGroupItem } from 'reactstrap'
 import Style from 'styled-components'
 import Icon from '@mdi/react'
 import {
+  mdiCreditCardCheckOutline,
   mdiBusMultiple,
   mdiAccountGroupOutline,
   mdiCalendarMonthOutline,
@@ -82,6 +83,11 @@ function SidebarMenu(props) {
       icon: mdiAccountCheckOutline,
       text: 'Users',
       path: '/users'
+    },
+    {
+      icon: mdiCreditCardCheckOutline,
+      text: 'Top Up',
+      path: '/topup'
     }
   ]
 

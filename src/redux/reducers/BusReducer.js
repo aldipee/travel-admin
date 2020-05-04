@@ -3,7 +3,8 @@ import {
   ERROR_BUS,
   GET_ALL_BUS_FOR_AGENT,
   GET_ALL_BUS_FOR_ADMIN,
-  GET_AGENTS
+  GET_AGENTS,
+  GET_BUSESS
 } from '../actions/types'
 const initialState = {
   data: [],
@@ -25,6 +26,13 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: payload
+      }
+    }
+
+    case GET_BUSESS: {
+      return {
+        ...state,
+        data: payload
       }
     }
 
