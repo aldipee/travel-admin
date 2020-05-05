@@ -8,13 +8,16 @@ import {
   GET_ALL_PASSENGERS,
   USER_CHECK_IN
 } from './types'
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
 export const getReservations = (query) => async (dispatch) => {
   try {
     setLoading()
+    const token = `Bearer ${localStorage.getItem('token_user')}`
     query = (query && `reservations/all${query}&limit=8`) || 'reservations/all?limit=8'
-    const res = await axios.get(config.DATA_URL.concat(query))
+    const res = await axios.get(config.DATA_URL.concat(query), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_RESERVATIONS_DATA,
       payload: {
@@ -35,7 +38,10 @@ export const getAllPassengers = (query) => async (dispatch) => {
   try {
     setLoading()
     query = (query && `reservations/all-passengers${query}`) || 'reservations/all-passengers'
-    const result = await axios.get(config.DATA_URL.concat(query))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const result = await axios.get(config.DATA_URL.concat(query), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_ALL_PASSENGERS,
       payload: { data: result.data.data, pageInfo: result.data.pageInfo }
@@ -52,7 +58,10 @@ export const getReservationById = (id) => async (dispatch) => {
   try {
     setLoading()
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
-    const res = await axios.get(config.DATA_URL.concat(`reservations/${id}`))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(`reservations/${id}`), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_RESERVATIONS_BY_ID,
       payload: res.data.data
@@ -68,7 +77,14 @@ export const getReservationById = (id) => async (dispatch) => {
 
 export const checkInUser = (bookingCode, callback) => async (dispatch) => {
   try {
-    const res = await axios.post(config.DATA_URL.concat(`agents/check-in`), { bookingCode })
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.post(
+      config.DATA_URL.concat(`agents/check-in`),
+      { bookingCode },
+      {
+        headers: { Authorization: `${token}` }
+      }
+    )
     console.log(res.data)
     if (res.data.status === 'Check-In Completed') {
       callback(true)

@@ -6,7 +6,10 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
 export const getUserById = (id) => async (dispatch) => {
   try {
     setLoading()
-    const res = await axios.get(config.DATA_URL.concat(`users/profile/${id}`))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(`users/profile/${id}`), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_USER_BY_ID,
       payload: {
@@ -26,7 +29,10 @@ export const getAllUsers = (query) => async (dispatch) => {
   try {
     setLoading()
     query = (query && `users/${query}`) || 'users?limit=5'
-    const res = await axios.get(config.DATA_URL.concat(query))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(query), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_ALL_USERS,
       payload: {

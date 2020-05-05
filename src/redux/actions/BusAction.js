@@ -8,11 +8,14 @@ import {
   GET_AGENTS,
   GET_BUSESS
 } from './types'
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
 export const getBusForAgent = () => async (dispatch) => {
   try {
-    const res = await axios.get(config.DATA_URL.concat('bus'))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat('bus'), {
+      headers: { Authorization: `${token}` }
+    })
     if (res) {
       let bus = res.data.data.map((bus) => ({
         value: `${bus.id}`,
@@ -33,7 +36,10 @@ export const getBusForAgent = () => async (dispatch) => {
 
 export const getBusForAdmin = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(config.DATA_URL.concat(`bus/agent/${id}`))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(`bus/agent/${id}`), {
+      headers: { Authorization: `${token}` }
+    })
     if (res) {
       dispatch({
         type: GET_ALL_BUS_FOR_ADMIN,
@@ -49,7 +55,10 @@ export const getBusForAdmin = (id) => async (dispatch) => {
 }
 export const getAllBus = () => async (dispatch) => {
   try {
-    const res = await axios.get(config.DATA_URL.concat('bus'))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat('bus'), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_BUSESS,
       payload: res.data.data
@@ -59,7 +68,10 @@ export const getAllBus = () => async (dispatch) => {
   }
 }
 export const loadAgents = () => async (dispatch) => {
-  const data = await axios.get(config.DATA_URL.concat('agents'))
+  const token = `Bearer ${localStorage.getItem('token_user')}`
+  const data = await axios.get(config.DATA_URL.concat('agents'), {
+    headers: { Authorization: `${token}` }
+  })
   let agents = data.data.data.map((dest) => ({
     value: `${dest.agent_id}`,
     label: `${dest.agent_name} `
@@ -72,9 +84,11 @@ export const loadAgents = () => async (dispatch) => {
 
 export const insertBus = (data, callback) => async (dispatch) => {
   try {
+    const token = `Bearer ${localStorage.getItem('token_user')}`
     const res = await axios.post(config.DATA_URL.concat('bus'), data, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        Authorization: `${token}`
       }
     })
     if (res.data.status) {

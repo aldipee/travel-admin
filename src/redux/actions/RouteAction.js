@@ -10,12 +10,15 @@ import {
   TOOGLE_INSERT_MODAL
 } from './types'
 // Set Token
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 export const getAllRoutes = (query) => async (dispatch) => {
   try {
     setLoading()
+    const token = `Bearer ${localStorage.getItem('token_user')}`
     const req = (query && `routes${query}`) || 'routes?limit=5'
-    const res = await axios.get(config.DATA_URL.concat(req))
+    const res = await axios.get(config.DATA_URL.concat(req), {
+      headers: { Authorization: `${token}` }
+    })
 
     dispatch({
       type: GET_ALL_ROUTES,
@@ -37,7 +40,10 @@ export const addRoutes = (e) => async (dispatch) => {
     setLoading()
     e.preventDefault()
     const data = formSerialize(e.target, { hash: true })
-    const res = await axios.post(config.DATA_URL.concat('routes'), data)
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.post(config.DATA_URL.concat('routes'), data, {
+      headers: { Authorization: `${token}` }
+    })
     if (res.status === 200) {
       swal('Success!', 'New route inserted!', 'success')
       dispatch({

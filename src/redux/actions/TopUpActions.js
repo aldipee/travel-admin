@@ -1,12 +1,15 @@
 import axios from 'axios'
 import { GET_ALL_TOPUP, APPROVE_TOPUP } from '../actions/types'
 import config from '../../utils/config'
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
 export const getAllTopUp = (query) => async (dispatch) => {
   try {
     query = (query && `topup/${query}`) || 'topup?limit=5'
-    const res = await axios.get(config.DATA_URL.concat(query))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(query), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_ALL_TOPUP,
       payload: {
@@ -22,7 +25,14 @@ export const getAllTopUp = (query) => async (dispatch) => {
 export const approveTopUp = (id, callback) => async (dispatch) => {
   try {
     let query = `topup/${id}`
-    const res = await axios.patch(config.DATA_URL.concat(query))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.patch(
+      config.DATA_URL.concat(query),
+      {},
+      {
+        headers: { Authorization: `${token}` }
+      }
+    )
     if (res.data.success) {
       dispatch({
         type: APPROVE_TOPUP,

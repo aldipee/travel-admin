@@ -6,13 +6,13 @@ export const userLogin = (username, password, callback) => async (dispatch) => {
     setLoading()
     const res = await axios.post('http://localhost:5001/auth/login', { username, password })
     if (res.data.token) {
-      callback(true)
       localStorage.setItem('token_user', res.data.token)
       localStorage.setItem('role', res.data.role)
       dispatch({
         type: SET_LOGIN,
         payload: res.data.role
       })
+      callback(true)
     } else {
       callback(false)
     }

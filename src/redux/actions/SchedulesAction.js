@@ -12,7 +12,7 @@ import {
   EDIT_SCHEDULES
 } from './types'
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
 export const getSchedules = (query) => async (dispatch) => {
   try {
@@ -40,7 +40,10 @@ export const getSchedules = (query) => async (dispatch) => {
 }
 export const addSchedule = (data) => async (dispatch) => {
   try {
-    const res = await axios.post(config.DATA_URL.concat(`schedules`), data)
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.post(config.DATA_URL.concat(`schedules`), data, {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: AGENT_ADD_NEW_SCHEDULES,
       payload: res.data
@@ -56,7 +59,10 @@ export const addSchedule = (data) => async (dispatch) => {
 
 export const getSchedulesForAgent = (query) => async (dispatch) => {
   try {
-    const res = await axios.get(config.DATA_URL.concat(`schedules/my-schedules${query}`))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(`schedules/my-schedules${query}`), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_SCHEDULES_FOR_AGENT,
       payload: res.data.data
@@ -73,7 +79,10 @@ export const updateSchedules = (id, data) => async (dispatch) => {
   try {
     setLoading()
     console.log('DATA HERE')
-    const response = await axios.patch(config.DATA_URL.concat(`schedules/${id}`), data)
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const response = await axios.patch(config.DATA_URL.concat(`schedules/${id}`), data, {
+      headers: { Authorization: `${token}` }
+    })
     alert('Updated')
     dispatch({
       type: EDIT_SCHEDULES,
@@ -91,7 +100,10 @@ export const loadRoutes = () => async (dispatch) => {
   try {
     console.log('THIS IS FROM SCHEDULES ACTION')
     console.log(config.DATA_URL.concat('routes?show=all'))
-    const res = await axios.get(config.DATA_URL.concat('routes?show=all'))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat('routes?show=all'), {
+      headers: { Authorization: `${token}` }
+    })
     console.log(res)
     let routes = res.data.data.map((dest) => ({
       value: `${dest.origin_code}-${dest.destination_code}`,
@@ -109,7 +121,10 @@ export const loadRoutes = () => async (dispatch) => {
 export const loadRoutesWithID = () => async (dispatch) => {
   try {
     setLoading()
-    const res = await axios.get(config.DATA_URL.concat('routes?show=all'))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat('routes?show=all'), {
+      headers: { Authorization: `${token}` }
+    })
     let routes = res.data.data.map((dest) => ({
       value: `${dest.id}`,
       label: `${dest.origin} (${dest.origin_code}) - ${dest.destination} (${dest.destination_code})`
@@ -128,7 +143,10 @@ export const loadRoutesWithID = () => async (dispatch) => {
 
 export const getSchedulesById = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(config.DATA_URL.concat(`schedules/${id}`))
+    const token = `Bearer ${localStorage.getItem('token_user')}`
+    const res = await axios.get(config.DATA_URL.concat(`schedules/${id}`), {
+      headers: { Authorization: `${token}` }
+    })
     dispatch({
       type: GET_SCHEDULES_BY_ID,
       payload: res.data.data
