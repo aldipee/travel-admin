@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Button,
@@ -17,6 +17,7 @@ import { MdAirportShuttle } from 'react-icons/md'
 import InsertModal from '../../../components/Buses/ModalInsert'
 import { connect } from 'react-redux'
 import { getAllBus, insertBus } from '../../../redux/actions/BusAction'
+import config from '../../../utils/config'
 import styled from 'styled-components'
 
 const BusTitle = styled('h5')`
@@ -61,11 +62,17 @@ function Buses(props) {
                 <LinkTo to={`${props.match.path}/edit/${data && data.id}`}>
                   <Row className="px-3 my-2">
                     <Col sm={3}>
-                      <MdAirportShuttle color=" rgba(0,0,0,0.1)" size={50} />
+                      <img
+                        style={{ width: '120%', borderRadius: 5 }}
+                        src={data && data.picture && config.DATA_URL.concat(`public/users/${data.picture}`)}
+                      />
+                      {/* <MdAirportShuttle color=" rgba(0,0,0,0.1)" size={50} /> */}
                     </Col>
                     <Col sm={8}>
                       <BusTitle>{data && data.name}</BusTitle>
-                      <BusDesc>{data && data.total_seat} seats</BusDesc>
+                      <BusDesc>
+                        {data && data.total_seat} seats | {data && data.police_number}
+                      </BusDesc>
                     </Col>
                   </Row>
                 </LinkTo>

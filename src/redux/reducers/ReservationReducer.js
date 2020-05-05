@@ -3,11 +3,13 @@ import {
   GET_RESERVATIONS_DATA,
   ERROR_RESERVATIONS,
   GET_RESERVATIONS_BY_ID,
-  GET_ALL_PASSENGERS
+  GET_ALL_PASSENGERS,
+  USER_CHECK_IN
 } from '../actions/types'
 const initialState = {
   data: [],
   singleData: {},
+  checkIn: {},
   isLoading: false,
   pageInfo: {},
   error: null
@@ -19,7 +21,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        data: action.payload
+        data: action.payload.data,
+        pageInfo: action.payload.pageInfo
       }
     }
     case SET_LOADING_RESERVATIONS: {
@@ -46,6 +49,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: action.payload
+      }
+    }
+    case USER_CHECK_IN: {
+      return {
+        ...state,
+        checkIn: action.payload
       }
     }
 

@@ -10,7 +10,7 @@ const PrivateRoute = ({ component: Component, setLogout, ...rest }) => {
   localStorage.removeItem('role')
   //   Auth.Logout()
   setLogout()
-  window.location.reload()
+
   return (
     // Show the component only when the user is logged in
     // Otherwise, redirect the user to /signin page

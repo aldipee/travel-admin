@@ -5,7 +5,8 @@ import {
   ERROR_RESERVATIONS,
   SET_LOADING_RESERVATIONS,
   GET_RESERVATIONS_BY_ID,
-  GET_ALL_PASSENGERS
+  GET_ALL_PASSENGERS,
+  USER_CHECK_IN
 } from './types'
 axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token_user')}`
 
@@ -37,7 +38,7 @@ export const getAllPassengers = (query) => async (dispatch) => {
     const result = await axios.get(config.DATA_URL.concat(query))
     dispatch({
       type: GET_ALL_PASSENGERS,
-      payload: result.data.data
+      payload: { data: result.data.data, pageInfo: result.data.pageInfo }
     })
   } catch (error) {
     dispatch({
@@ -62,6 +63,24 @@ export const getReservationById = (id) => async (dispatch) => {
       type: ERROR_RESERVATIONS,
       payload: error.response.data
     })
+  }
+}
+
+export const checkInUser = (bookingCode, callback) => async (dispatch) => {
+  try {
+    const res = await axios.post(config.DATA_URL.concat(`agents/check-in`), { bookingCode })
+    console.log(res.data)
+    if (res.data.status === 'Check-In Completed') {
+      callback(true)
+      dispatch({
+        type: USER_CHECK_IN,
+        payload: res.data.detailsInfo
+      })
+    } else {
+      callback(false)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
